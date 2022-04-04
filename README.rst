@@ -1,8 +1,8 @@
 Telethon MTProxy FakeTLS
-========
+========================
 .. epigraph::
 
-  ⭐️ Thanks **everyone** who has starred the project, it means a lot!
+  ⭐️Thanks **everyone** who has starred the project, it means a lot!
 
 TelethonFakeTLS adds support MTProxyFakeTLS Proxy (EE-secrets) to Telethon! (yes finally !!!)
 
@@ -20,7 +20,6 @@ Installing
 .. code-block:: sh
 
   pip3 install TelethonFakeTLS
-
 
 Creating a client
 -----------------
@@ -55,8 +54,4 @@ Creating a client
         proxy=proxy)
 
     client.start()
-
-
-
-
 
