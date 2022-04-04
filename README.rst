@@ -1,4 +1,4 @@
-Telethon MTProxy FakeTLS
+Telethon MTProxy Fake TLS
 ========================
 .. epigraph::
 
