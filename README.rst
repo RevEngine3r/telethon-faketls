@@ -1,4 +1,4 @@
-Telethon
+Telethon MTProxy FakeTLS
 ========
 .. epigraph::
 
@@ -11,7 +11,7 @@ TelethonFakeTLS adds support MTProxyFakeTLS Proxy (EE-secrets) to Telethon! (yes
 What is this?
 -------------
 
-After long wait for Lonami to ass support for EE proxy, i tired up and started implementing it myself !
+After long wait for Telethon to add support for EE proxy, i tired up and started implementing it myself !
 
 
 Installing
