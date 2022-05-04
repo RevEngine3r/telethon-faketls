@@ -1,10 +1,13 @@
 import base64
-import re
-from . import EncryptionHelper as Eh
-import hmac
 import hashlib
-import time
+import hmac
 import logging as log
+import re
+import time
+
+from typing import Union
+
+from . import EncryptionHelper as Eh
 
 
 def gen_sha256_digest(key: bytes, msg: bytes) -> bytes:
@@ -19,7 +22,7 @@ def decode_b64(s: str) -> bytes:
 
 
 class MTProxyFakeTLSClientCodec:
-    client_hello_dict: dict[str:bytes] = {
+    client_hello_dict: dict[str, bytes] = {
         'content_type': b'\x16',  # handshake (22)
         'version': b'\x03\x01',  # TLS 1.0
         'len': b'\x02\x00',  # 512
@@ -99,8 +102,8 @@ class MTProxyFakeTLSClientCodec:
         self.pkt: bytes = b''
 
     # set or get parameters from client hello dict
-    def client_hello(self, key: str, value: bytes | int | str | None = None,
-                     ret_type: type(bytes) | type(str) | type(int) = type(bytes)) -> bytes | int | str | None:
+    def client_hello(self, key: str, value: Union[bytes, int, str, None] = None,
+                     ret_type: Union[bytes, str, int] = type(bytes)) -> Union[bytes, int, str, None]:
         if value is None:
             if ret_type is bytes:
                 return self.client_hello_dict[key]
@@ -109,11 +112,13 @@ class MTProxyFakeTLSClientCodec:
             if ret_type is int:
                 return int.from_bytes(self.client_hello_dict[key], 'big')
 
-        if type(value) is str:
+        if isinstance(value, str):
             value = value.encode(encoding='utf8')
-        elif type(value) is int:
+        elif isinstance(value, int):
             value = value.to_bytes(length=len(self.client_hello_dict[key]), byteorder='big')
 
+        if not isinstance(value, bytes):
+            raise TypeError(f'Value type: {type(value)}')
         self.client_hello_dict[key] = value
         self.is_pkt_changed = True
 
